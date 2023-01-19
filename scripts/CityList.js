@@ -1,40 +1,39 @@
-import { getCities, getWalkerCities } from "./database.js"
+import { getCities, getWalkerCities } from "./database.js";
 
-const cities = getCities()
-
+const cities = getCities();
 
 export const CityList = () => {
-    let citiesHTML = "<ul>"
+  let citiesHTML = "<ul>";
 
-    for (const city of cities) {
-        citiesHTML += `<li>${city.name}</li>`
-    }
+  for (const city of cities) {
+    citiesHTML += `<li>${city.name}</li>`;
+  }
 
-    citiesHTML += "</ul>"
+  citiesHTML += "</ul>";
 
-    return citiesHTML
-}
+  return citiesHTML;
+};
 
-const walkerCities = getWalkerCities()
+const walkerCities = getWalkerCities();
 
 export const FindWalkerCities = (walker) => {
-    let cityOfWalkers = [] 
-
-    for(const walkerCity of walkerCities) {
-        if(walkerCity.walkerId === walkerCities.id) {
-            cityOfWalkers.push(walkerCity)
-        }
+  let cityOfWalkers = [];
+  for (const walkerCity of walkerCities) {
+    if (walkerCity.walkerId === walker.id) {
+      cityOfWalkers.push(walkerCity);
     }
-    return cityOfWalkers
-}
+  }
+  return cityOfWalkers;
+};
 
 export const MatchCity = (cityOfWalkers) => {
-    let cityNames = ''
-    for(const cityOfWalker of cityOfWalkers) {
-        for(const city of cities)
-        if(city.id === cityOfWalker.cityId) {
-            cityNames += `${city.name} and ${city.name}`
-        }
+  let cityNames = "";
+  for (const cityOfWalker of cityOfWalkers) {
+    for (const city of cities) {
+      if (city.id === cityOfWalker.cityId) {
+        cityNames = `${city.name}, ${cityNames}`
+      }
     }
-    return cityNames
-}
+  }
+  return cityNames;
+};
